@@ -21,7 +21,6 @@ async function exportCallDataGroth16(input, wasmPath, zkeyPath) {
   for (let i = 8; i < argv.length; i++) {
     Input.push(argv[i]);
   }
-
   return { a, b, c, Input };
 }
 

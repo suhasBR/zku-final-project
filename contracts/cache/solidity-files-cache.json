@@ -1,44 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/suhas/zku/zku-final-project/contracts/node_modules/hardhat/console.sol": {
-      "lastModificationDate": 1655305303970,
-      "contentHash": "cc4777addd464ea56fa35b1c45df0591",
-      "sourceName": "hardhat/console.sol",
-      "solcConfig": {
-        "version": "0.8.4",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.4.22 <0.9.0"
-      ],
-      "artifacts": [
-        "console"
-      ]
-    },
     "/home/suhas/zku/zku-final-project/contracts/contracts/authVerifier.sol": {
-      "lastModificationDate": 1655305702414,
-      "contentHash": "2e54206d30884992bfb85212dcd337b6",
+      "lastModificationDate": 1655721028365,
+      "contentHash": "27089f2de1a448f90b0922a33514e6f3",
       "sourceName": "contracts/authVerifier.sol",
       "solcConfig": {
         "version": "0.8.4",

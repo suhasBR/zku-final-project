@@ -31,4 +31,6 @@ snarkjs zkey export solidityverifier auth/circuit_final.zkey contracts/authVerif
 # bump solidity version
 sed -i 's/0.6.11;/0.8.4;/g' contracts/authVerifier.sol
 
+# snarkjs generatecall | tee parameters.txt
+
 cd ..

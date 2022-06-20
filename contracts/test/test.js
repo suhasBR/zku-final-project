@@ -12,11 +12,12 @@ describe("authtest", function(){
     });
 
     it("should pass auth test", async function(){
-        const pubHash = '19620391833206800292073497099357851348339828238212863168390691880932172496143';
-        const secret = '123';
-        const rString = '456';
+        const pubHash = '3572713155681323789438913994065456644420707158212740033489761108462149416484';
+        const pubKey = "0xA299DE74e1Bfb116Edb1813351A5e8ba9E1E7f86";
+        const secret = '98765';
+        const rString = '12345';
 
-        const input = {pubHash, secret, rString};
+        const input = {pubHash, pubKey, secret, rString};
 
         let data = await exportCallDataGroth16(
             input,
@@ -35,11 +36,12 @@ describe("authtest", function(){
     });
 
     it("should fail auth test", async function(){
-        const pubHash = '123';
-        const secret = '123';
-        const rString = '456';
+        const pubHash = '3572713155681323789438913994065456644420707158212740033489761108462149416484';
+        const pubKey = "0xA299DE74e1Bfb116Edb1813351A5e8ba9E1E7f86";
+        const secret = '98765';
+        const rString = '12344';
 
-        const input = {pubHash, secret, rString};
+        const input = {pubHash, pubKey, secret, rString};
 
         let data = await exportCallDataGroth16(
             input,
