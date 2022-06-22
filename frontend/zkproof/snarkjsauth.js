@@ -14,7 +14,7 @@ export async function authCallData(input1) {
     );
   } catch (error) {
     console.log(error);
-    window.alert("Wrong answer");
+    return;
   }
 
   return dataResult;
