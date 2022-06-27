@@ -8,7 +8,7 @@ function Working() {
         <div className="my-4">
             <h2 className="text-base font-bold">Phase 1</h2>
             <p className="text-base">Enter your email, secret numeric password. <br></br> 
-            Create your anonymous identity using 'Create Semaphore Identity' button
+            Create your anonymous identity using Create Semaphore Identity button
             <br></br>
             Copy down the public hash. <br></br>
             Identity string will be stored on the browser automatically</p>
