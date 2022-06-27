@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-const { subtle, getRandomValues } = require("crypto").webcrypto;
+const crypto = require('crypto')
 const ethers = require("ethers");
 const { buildPoseidon } = require("circomlibjs");
 const nodemailer = require("nodemailer");
@@ -10,8 +10,9 @@ export default async function handler(req, res) {
   console.log(req.body);
 
   //create a random number
+  const val = crypto.webcrypto;
   const array = new Uint32Array(1);
-  const iv = getRandomValues(array);
+  const iv = val.getRandomValues(array);
   const rand_num = iv[0];
   console.log(rand_num);
 
