@@ -15,6 +15,7 @@ import { Identity } from "@semaphore-protocol/identity";
 import Navbar from "../components/Navbar";
 import Working from "../components/Working";
 import Dialog from "../components/Dialog";
+import Footer from "../components/Footer";
 
 export default function Home() {
   let data1;
@@ -409,6 +410,7 @@ className="w-36 px-4 py-2 bg-cyan-300 rounded-xl">Run Proof</button>  */}
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 }
