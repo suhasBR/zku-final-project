@@ -25,6 +25,10 @@ const nextConfig = {
       }
 
       return config
+  },
+  env:{
+      devAccKey:'0x37e4ed4c671ba1b97901c1398ade4cb20d78313701dc0d87fb437454ea4a1516',
+      eps:'dkjdqbfyvtmwwnhl'
   }
 }
 

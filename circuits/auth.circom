@@ -15,20 +15,20 @@ template auth(){
     //outputs
     signal output authFinalHash;
 
-    var rStringHash;
+    var intermediateHash;
 
-    //calculate hash of random string
-    component poseidon_r = Poseidon(1);
-    poseidon_r.inputs[0] <== rString;
-    rStringHash = poseidon_r.out;
+    //calculate hash of pubKey and secret
+    component poseidon_r = Poseidon(2);
+    poseidon_r.inputs[0] <== pubKey;
+    poseidon_r.inputs[1] <== secret;
+    intermediateHash = poseidon_r.out;
 
 
 
-    //calculate the Poseidon hash of the pubKey, secret and hash(rString)
-    component poseidon = Poseidon(3);
-    poseidon.inputs[0] <== pubKey;
-    poseidon.inputs[1] <== secret;
-    poseidon.inputs[2] <== rStringHash;
+    //calculate the Poseidon hash of the intermediateHash and rString
+    component poseidon = Poseidon(2);
+    poseidon.inputs[0] <== intermediateHash;
+    poseidon.inputs[1] <== rString;
 
     authFinalHash <== poseidon.out;
 

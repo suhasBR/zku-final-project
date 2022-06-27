@@ -1,6 +1,6 @@
 
 const main = async() => {
-    const AuthVerifier = await ethers.getContractFactory("Verifier");
+    const AuthVerifier = await ethers.getContractFactory("Auth");
     const authVerifier = await AuthVerifier.deploy();
 
     await authVerifier.deployed();
