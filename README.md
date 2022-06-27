@@ -63,8 +63,22 @@ yarn dev
 ```
 
 ## Screenshots
+How it Works
+<br/>
+<br/>
 <img width="947" alt="image" src="https://user-images.githubusercontent.com/14362923/176052029-0247fb3d-ff7c-4e76-a844-62817f712214.png">
+<br/>
+<br/>
+Phase 1
+<br/>
+<br/>
 <img width="952" alt="image" src="https://user-images.githubusercontent.com/14362923/176052186-e2efc5cf-2e11-4598-bc09-c5a918f9e499.png">
+<br/>
+<br/>
+Phase 2 
+<br/>
+<br/>
 <img width="947" alt="image" src="https://user-images.githubusercontent.com/14362923/176052250-e8518fa2-0169-4eb4-8529-93b56f558a59.png">
+<br/>
 
 
