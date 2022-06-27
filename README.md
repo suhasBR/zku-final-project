@@ -29,6 +29,37 @@ The project consists of three folders
 3) frontend - NextJS project with the front end and server for sending email
 Refer to each folders to understand how to use them.
 
+## How to Run Locally
+Clone the repository
+```shell
+git clone https://github.com/suhasBR/zku-final-project.git
+```
+Compile Circuits
+```shell
+cd circuits
+```
+Follow instructions given in circuits folder to compile circuits
 
+Run Contracts
+```shell
+cd contracts
+```
+Follow instructions given in contracts folder
+
+Run Frontend
+Enter frontend
+```shell
+cd frontend
+```
+
+Install Dependencies
+```shell
+yarn i
+```
+
+Run Dev Server
+```shell
+yarn dev
+```
 
 
