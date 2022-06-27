@@ -85,5 +85,7 @@ const store_hash = async (addr, hashed_string) => {
   const myContract_write = new ethers.Contract(address, myAbi.abi, signer);
   myContract_write.commitHash(addr, hashed_string).then((result) => {
     console.log(result);
+  }).catch((error)=> {
+    console.log(error);
   });
 };
