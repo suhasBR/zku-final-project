@@ -19,7 +19,7 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   let data1;
-  const contractAddr = "0x2523169938300dd5ECB5486fd3D6716b90e0c692";
+  const contractAddr = "0x850Df96C3cd7215764AC31D907fFdEaeb3022E24";
 
 
   const { data: account } = useAccount();
@@ -299,7 +299,7 @@ export default function Home() {
 
       } catch (error) {
         console.log(error);
-        openDialog("Something went wrong! Check if group ID already exists");
+        openDialog("Something went wrong! Group ID may already exists");
       }
     },
   });
@@ -330,7 +330,7 @@ export default function Home() {
                 onSubmit={formik.handleSubmit}
               >
                 <label htmlFor="groupId" className="text-white">
-                  Select Group ID to join
+                  Enter Group ID to join
                 </label>
                 <input
                   className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
@@ -432,7 +432,7 @@ export default function Home() {
                 onSubmit={formik2.handleSubmit}
               >
                 <label htmlFor="groupId" className="text-white">
-                  Re-enter Group ID to join
+                  Confirm Group ID to join
                 </label>
                 <input
                   className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
@@ -455,7 +455,7 @@ export default function Home() {
                   onChange={formik2.handleChange}
                 ></input>
                 <label htmlFor="secret" className="text-white">
-                  Secret
+                  Number Password
                 </label>
                 <input
                   className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"

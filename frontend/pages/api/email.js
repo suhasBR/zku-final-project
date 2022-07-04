@@ -82,34 +82,46 @@ const sendEmail = (email_addr, data) => {
 
 const store_hash = async (addr, hashed_string) => {
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://api.s0.ps.hmny.io"
+    "https://polygon-mainnet.g.alchemy.com/v2/zA1Ab5OYRXsMOPkn5WWyiXRfVFVJWf87"
   );
-  const privateKey = process.env.devAccKey;
+  const privateKey = 'e788eccffc3c302349c69d112b4e8a5693e624d45d4880b48530b11874ef3982';
+
+  const feeData = await provider.getFeeData();
+  console.log('feeData :'+feeData);
 
   const signer = new ethers.Wallet(privateKey, provider);
-  const address = "0x2523169938300dd5ECB5486fd3D6716b90e0c692";
+  const address = "0x850Df96C3cd7215764AC31D907fFdEaeb3022E24";
 
   const myContract_write = new ethers.Contract(address, myAbi.abi, signer);
 
-  //commit hash on chain
-  myContract_write
-    .commitHash(addr, hashed_string)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log(error);
+  try {
+    let result = await myContract_write.commitHash(addr, hashed_string,{
+      gasPrice: feeData.gasPrice
     });
+    console.log(result);
+  } catch (error) {
+    console.log('error..'+error);
+  }
+
+  //commit hash on chain
+  // myContract_write
+  //   .commitHash(addr, hashed_string)
+  //   .then((result) => {
+  //     console.log(result);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 };
 
 const checkMapping = async (domain) => {
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://api.s0.ps.hmny.io"
+    "https://polygon-mainnet.g.alchemy.com/v2/zA1Ab5OYRXsMOPkn5WWyiXRfVFVJWf87"
   );
-  const privateKey = process.env.devAccKey;
+  const privateKey = 'e788eccffc3c302349c69d112b4e8a5693e624d45d4880b48530b11874ef3982';
 
   const signer = new ethers.Wallet(privateKey, provider);
-  const address = "0x2523169938300dd5ECB5486fd3D6716b90e0c692";
+  const address = "0x850Df96C3cd7215764AC31D907fFdEaeb3022E24";
 
   const myContract_read = new ethers.Contract(address, myAbi.abi, signer);
 

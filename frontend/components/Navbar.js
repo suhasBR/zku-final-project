@@ -3,7 +3,8 @@ import React from 'react'
 function Navbar({account,clickHandler,connectHandler}) {
   return (
     <div className="w-full px-8 py-4 flex flex-row justify-between bg-[#264653] items-center">
-        <h1 className="text-white text-3xl font-bold">zkEmailAuth</h1>
+        <h1 onClick={() => clickHandler(0)}
+        className="text-white text-3xl font-bold cursor-pointer">zkEmailAuth</h1>
         {
             !account ? (
                 <button
