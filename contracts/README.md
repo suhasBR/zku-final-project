@@ -17,15 +17,15 @@ npx hardhat test
 
 Deploying to localhost
 ```shell
-npx hardhat deploy --network localhost scripts/deploy.js
+npx hardhat run --network localhost scripts/deploy.js
 ```
 
 Deploying to devnet
 ```shell
-npx hardhat deploy --network devnet scripts/deploy.js
+npx hardhat run --network devnet scripts/deploy.js
 ```
 
 Deploying to mainnet
 ```shell
-npx hardhat deploy --network mainnet scripts/deploy.js
+npx hardhat run --network mainnet scripts/deploy.js
 ```

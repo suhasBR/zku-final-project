@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import React, { useState } from "react";
-import { useAccount, useConnect, useContract, useSigner } from "wagmi";
+import { useAccount, useConnect, useContract, useSigner, useContractEvent } from "wagmi";
 import { useFormik } from "formik";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import authABI from "../utils/abi.json";
@@ -19,11 +19,15 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   let data1;
+  const contractAddr = "0x2523169938300dd5ECB5486fd3D6716b90e0c692";
+
 
   const { data: account } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
+
+ 
 
   const [pubHash, changePubHash] = useState("");
   const [identityCommitment, changeIdentityCommitment] = useState("");
@@ -31,21 +35,30 @@ export default function Home() {
   const [dialogOpen, changeDialogOpen] = useState(false);
   const [dialogText, changeDialogText] = useState("");
 
+  const [grpId, changeGrpId] = useState("");
+
+  const onChange = (e) => {
+    changeGrpId(e.target.value);
+  };
+
   const { data: signer, isError, isLoading } = useSigner();
 
   const contract = useContract({
-    addressOrName: "0x6286dAb91901A0B18C57e0dB095CeA1901b9a2F4",
+    addressOrName: contractAddr,
     contractInterface: authABI.abi,
     signerOrProvider: signer,
   });
 
+
   let userSchema = object({
+    groupId: string().required(),
     email: string().email().required(),
     password: string().required(),
   });
 
   const formik = useFormik({
     initialValues: {
+      groupId: "",
       email: "",
       password: "",
     },
@@ -66,7 +79,11 @@ export default function Home() {
         const poseidon = await buildPoseidon();
         const int_hash = ethers.BigNumber.from(
           poseidon.F.toString(
-            poseidon([account.address, formik.values.password])
+            poseidon([
+              formik.values.groupId,
+              account.address,
+              formik.values.password,
+            ])
           )
         ).toBigInt();
 
@@ -80,10 +97,13 @@ export default function Home() {
         };
 
         const body = {
+          groupId: parsedUser.groupId,
           email: parsedUser.email,
           intHash: intHash,
           addr: account.address,
         };
+
+        console.log(body);
 
         const res = await axios.post("/api/email", body, config);
         console.log("final hash : " + res.data);
@@ -106,23 +126,23 @@ export default function Home() {
     },
   });
 
-  const getData = async () => {
-    const input = {
-      pubHash:
-        "7456496290823021281081032811052666664496510297601767980302286514100278878013",
-      pubKey: "0xA299DE74e1Bfb116Edb1813351A5e8ba9E1E7f86",
-      secret: "12345",
-      rString: "98765",
-    };
+  // const getData = async () => {
+  //   const input = {
+  //     pubHash:
+  //       "7456496290823021281081032811052666664496510297601767980302286514100278878013",
+  //     pubKey: "0xA299DE74e1Bfb116Edb1813351A5e8ba9E1E7f86",
+  //     secret: "12345",
+  //     rString: "98765",
+  //   };
 
-    //get calldata
-    data1 = await authCallData(input);
+  //get calldata
+  //   data1 = await authCallData(input);
 
-    console.log(data1);
-  };
+  //   console.log(data1);
+  // };
 
   const runProof = async (data) => {
-    console.log(data);
+    console.log("running proof..." + data);
     if (identityCommitment == "") {
       changeDialogText("Create Semaphore Identity first!");
       changeDialogOpen(true);
@@ -171,16 +191,14 @@ export default function Home() {
       console.log(identityCommitment);
       let result2 = await contract.isAuthenticated(identityCommitment);
       console.log(result2);
+      result2 = ethers.BigNumber.from(result2).toNumber();
       if (result2) {
-        changeDialogText("Email is verified for your identity !");
-        changeDialogOpen(true);
+        openDialog(`Email is verified for your identity ! Belongs to group ID ${result2}`);
       } else {
-        changeDialogText("Email verification failed !");
-        changeDialogOpen(true);
+        openDialog("Email verification failed !");
       }
     } catch (error) {
-      changeDialogText("Something went wrong");
-      changeDialogOpen(true);
+      openDialog("Something went wrong");
       console.log(error);
     }
   };
@@ -188,16 +206,18 @@ export default function Home() {
   const formik2 = useFormik({
     initialValues: {
       pubhash: "",
+      groupId: "",
       secret: "",
       rstring: "",
     },
     onSubmit: async (values) => {
       try {
         const userData = JSON.stringify(values, null, 2);
-        // console.log("userdata", userData);
+        console.log("userdata", userData);
         const input = {
           pubHash: formik2.values.pubhash,
           pubKey: account.address,
+          groupId: formik2.values.groupId,
           secret: formik2.values.secret,
           rString: formik2.values.rstring,
         };
@@ -206,10 +226,10 @@ export default function Home() {
 
         try {
           data1 = await authCallData(input);
-          console.log(data1);
+          console.log("callData:" + data1);
 
           if (!data1) {
-            alert("Failed to Authenticate!");
+            openDialog("Failed to Authenticate!");
             return;
           }
 
@@ -217,7 +237,7 @@ export default function Home() {
           runProof(data1);
         } catch (error) {
           console.log(error);
-          alert("Failed to Authenticate !");
+          openDialog("Failed to Authenticate! Verify input parameters");
         }
       } catch (error) {
         console.log(error.message);
@@ -225,11 +245,64 @@ export default function Home() {
     },
   });
 
-  const changeView = () => {};
-
   const connectWallet = () => {
     connect();
   };
+
+  const getGroupId = async () => {
+    let temp = grpId;
+    try {
+      let res = await contract.domainLookUp(temp);
+      res = ethers.BigNumber.from(res).toNumber();
+      if (res !== 0) {
+        openDialog(`Group Id for ${temp} is ${res}`);
+      } else {
+        openDialog("Group not created, create below");
+      }
+    } catch (error) {
+      openDialog("Something went wrong !");
+      console.log(error);
+    }
+  };
+
+  const openDialog = (text) => {
+    changeDialogText(text);
+    changeDialogOpen(true);
+  };
+
+  let idSchema = object({
+    domain: string().required(),
+    gid: number().required().positive().integer(),
+  });
+
+  const formik3 = useFormik({
+    initialValues: {
+      domain: "",
+      gid: undefined,
+    },
+    onSubmit: async (values) => {
+      try {
+        const idData = JSON.stringify(values, null, 2);
+        console.log("idData", idData);
+        const parsedIdData = await idSchema.validate(values, { strict: true });
+        console.log(parsedIdData);
+
+        let res = await contract.createGroup(
+          parsedIdData.domain,
+          parsedIdData.gid,
+          4,
+          0,
+          account.address
+        )
+
+        openDialog("Successfully created");
+
+      } catch (error) {
+        console.log(error);
+        openDialog("Something went wrong! Check if group ID already exists");
+      }
+    },
+  });
 
   return (
     <div className="flex flex-col min-h-screen items-center">
@@ -256,6 +329,18 @@ export default function Home() {
                 className="flex flex-col px-8 py-4 bg-[#2A9D8F] items-center justify-center rounded-xl"
                 onSubmit={formik.handleSubmit}
               >
+                <label htmlFor="groupId" className="text-white">
+                  Select Group ID to join
+                </label>
+                <input
+                  className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
+                  type="text"
+                  name="groupId"
+                  value={formik.values.groupId}
+                  autoComplete="off"
+                  onChange={formik.handleChange}
+                ></input>
+
                 <label htmlFor="email" className="text-white">
                   Email
                 </label>
@@ -334,7 +419,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      ) : (
+      ) : pageController == 2 ? (
         <div className="flex flex-row mt-20 items-center w-[80%] justify-between">
           <div className="flex flex-col">
             <h1 className="text-2xl text-center mb-8 font-bold">
@@ -346,6 +431,18 @@ export default function Home() {
                 className="flex flex-col px-8 py-4 bg-[#2A9D8F] items-center justify-center rounded-xl"
                 onSubmit={formik2.handleSubmit}
               >
+                <label htmlFor="groupId" className="text-white">
+                  Re-enter Group ID to join
+                </label>
+                <input
+                  className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
+                  type="text"
+                  name="groupId"
+                  value={formik2.values.groupId}
+                  autoComplete="off"
+                  onChange={formik2.handleChange}
+                ></input>
+
                 <label htmlFor="pubhash" className="text-white">
                   Public Hash
                 </label>
@@ -409,8 +506,66 @@ className="w-36 px-4 py-2 bg-cyan-300 rounded-xl">Run Proof</button>  */}
             </button>
           </div>
         </div>
+      ) : (
+        <div className="flex flex-col">
+          <div className="mt-20 flex flex-col items-center px-32 py-16 border border-black rounded-xl">
+            <h1 className="text-2xl mb-8 font-bold">Group Id Lookup</h1>
+            <label htmlFor="grpId">Enter domain name</label>
+            <input
+              type="text"
+              name="grpId"
+              className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
+              value={grpId}
+              onChange={(e) => onChange(e)}
+            ></input>
+            <button
+              onClick={() => getGroupId()}
+              className="w-72 px-4 py-2 bg-[#264653] text-white rounded-xl"
+            >
+              Check Group ID for domain
+            </button>
+          </div>
+
+          <div className="mt-20 flex flex-col items-center px-32 py-16 border border-black rounded-xl">
+            <h1 className="text-2xl mb-8 font-bold">Create New Group</h1>
+            <form
+              onSubmit={formik3.handleSubmit}
+              className="flex flex-col items-center"
+            >
+              <label htmlFor="domain" className="">
+                Domain
+              </label>
+              <input
+                className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
+                type="text"
+                name="domain"
+                value={formik3.values.domain}
+                autoComplete="off"
+                onChange={formik3.handleChange}
+              ></input>
+
+              <label htmlFor="gid" className="">
+                Group Id
+              </label>
+              <input
+                className="w-72 mt-2 mb-4 px-4 py-2 rounded-2xl border border-black"
+                type="number"
+                name="gid"
+                value={formik3.values.gid}
+                autoComplete="off"
+                onChange={formik3.handleChange}
+              ></input>
+              <button
+                type="submit"
+                className="w-72 px-4 py-2 bg-[#264653] text-white rounded-xl"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

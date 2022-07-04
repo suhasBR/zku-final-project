@@ -1,12 +1,31 @@
+const main = async () => {
+  const PoseidonContract = await ethers.getContractFactory(
+    "@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol:PoseidonT3"
+  );
+  const poseidonContract = await PoseidonContract.deploy();
+  await poseidonContract.deployed();
 
-const main = async() => {
-    const AuthVerifier = await ethers.getContractFactory("Auth");
-    const authVerifier = await AuthVerifier.deploy();
+  const IncrementalBinTree = await ethers.getContractFactory(
+    "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol:IncrementalBinaryTree",
+    {
+      libraries: {
+        PoseidonT3: poseidonContract.address,
+      },
+    }
+  );
+  const incrementalBinTree = await IncrementalBinTree.deploy();
+  await incrementalBinTree.deployed();
 
-    await authVerifier.deployed();
+  const AuthVerifier = await ethers.getContractFactory("Auth", {
+    libraries: {
+      IncrementalBinaryTree: incrementalBinTree.address,
+    },
+  });
+  const authVerifier = await AuthVerifier.deploy();
+  await authVerifier.deployed();
 
-    console.log("Smart contract deployed to:", authVerifier.address);
-}
+  console.log("Smart contract deployed to:", authVerifier.address);
+};
 
 main()
   .then(() => process.exit(0))

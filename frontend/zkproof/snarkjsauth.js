@@ -2,7 +2,7 @@ import { exportCallDataGroth16 } from "./snarkZkproof"
 
 export async function authCallData(input1) {
   const input = input1;
-  console.log(input);
+  console.log("input : "+ JSON.stringify(input));
 
   let dataResult;
 

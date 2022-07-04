@@ -13,13 +13,16 @@ function Navbar({account,clickHandler,connectHandler}) {
                 Connect Wallet
               </button>
             ):(
-                <div className="flex flex-row w-[30%] justify-between">
+                <div className="flex flex-row w-[40%] justify-between">
                     <h2 onClick={() => clickHandler(0)}
                     className="text-xl text-white cursor-pointer">How it Works</h2>
+                    <h2 onClick={() => clickHandler(3)}
+                    className="text-xl text-white cursor-pointer">Groups</h2>
                     <h2 onClick={() => clickHandler(1)}
                     className="text-xl text-white cursor-pointer">Phase1</h2>
                     <h2 onClick={() => clickHandler(2)}
                     className="text-xl text-white cursor-pointer">Phase2</h2>
+                    
                 </div>
             )
         }

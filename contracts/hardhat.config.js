@@ -20,17 +20,20 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   solidity: "0.8.4",
   networks: {
+    hardhat:{
+      chainId: 1337
+    },
     devnet: {
       url: `https://api.s0.ps.hmny.io`,
-      accounts: [process.env.devAccKey]
+      accounts: ['0x37e4ed4c671ba1b97901c1398ade4cb20d78313701dc0d87fb437454ea4a1516']
     },
     testnet: {
       url: `https://api.s0.b.hmny.io`,
-      accounts: [process.env.devAccKey]
+      accounts: ['0x37e4ed4c671ba1b97901c1398ade4cb20d78313701dc0d87fb437454ea4a1516']
     },
     mainnet: {
       url: `https://api.harmony.one`,
-      accounts: [process.env.devAccKey]
+      accounts: ['0x37e4ed4c671ba1b97901c1398ade4cb20d78313701dc0d87fb437454ea4a1516']
     }
   }
 };

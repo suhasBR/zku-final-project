@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/suhas/zku/zku-final-project/contracts/contracts/auth.sol": {
-      "lastModificationDate": 1656245558304,
-      "contentHash": "f30414ad5408f73168d6774b26b04d19",
+      "lastModificationDate": 1656945600713,
+      "contentHash": "7f066b2db80aceab24679f02bc779552",
       "sourceName": "contracts/auth.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -30,7 +30,11 @@
       },
       "imports": [
         "./authVerifier.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/Strings.sol",
+        "@semaphore-protocol/contracts/interfaces/ISemaphore.sol",
+        "@semaphore-protocol/contracts/base/SemaphoreCore.sol",
+        "@semaphore-protocol/contracts/base/SemaphoreGroups.sol"
       ],
       "versionPragmas": [
         "^0.8.4"
@@ -40,8 +44,8 @@
       ]
     },
     "/home/suhas/zku/zku-final-project/contracts/contracts/authVerifier.sol": {
-      "lastModificationDate": 1656234003180,
-      "contentHash": "840825bc3e4409cf48c282cef9ebfb73",
+      "lastModificationDate": 1656805040805,
+      "contentHash": "98515ac0f4e78d53d17295246f25e277",
       "sourceName": "contracts/authVerifier.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -76,7 +80,7 @@
       ]
     },
     "/home/suhas/zku/zku-final-project/contracts/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1656239827176,
+      "lastModificationDate": 1656805863969,
       "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -112,8 +116,156 @@
         "Ownable"
       ]
     },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1656805864041,
+      "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/interfaces/ISemaphore.sol": {
+      "lastModificationDate": 1656805868020,
+      "contentHash": "27bd41e87a5f57a065e76ebf0e679562",
+      "sourceName": "@semaphore-protocol/contracts/interfaces/ISemaphore.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphore"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/base/SemaphoreCore.sol": {
+      "lastModificationDate": 1656805867968,
+      "contentHash": "2fedc7b412a294da55dc310bf57e5d33",
+      "sourceName": "@semaphore-protocol/contracts/base/SemaphoreCore.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/ISemaphoreCore.sol",
+        "../interfaces/IVerifier.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "SemaphoreCore"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/base/SemaphoreGroups.sol": {
+      "lastModificationDate": 1656805867984,
+      "contentHash": "5fa56788d80bc9b5079df66b08e6011f",
+      "sourceName": "@semaphore-protocol/contracts/base/SemaphoreGroups.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SemaphoreConstants.sol",
+        "../interfaces/ISemaphoreGroups.sol",
+        "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol",
+        "@openzeppelin/contracts/utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "SemaphoreGroups"
+      ]
+    },
     "/home/suhas/zku/zku-final-project/contracts/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1656239827064,
+      "lastModificationDate": 1656805864041,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -145,6 +297,217 @@
       ],
       "artifacts": [
         "Context"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/interfaces/ISemaphoreCore.sol": {
+      "lastModificationDate": 1656805868020,
+      "contentHash": "f079ffeeed111ca1902c16ae9d700699",
+      "sourceName": "@semaphore-protocol/contracts/interfaces/ISemaphoreCore.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphoreCore"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/interfaces/IVerifier.sol": {
+      "lastModificationDate": 1656805868040,
+      "contentHash": "47b3f60f5f66b5dc2171c65069aa613a",
+      "sourceName": "@semaphore-protocol/contracts/interfaces/IVerifier.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "IVerifier"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/base/SemaphoreConstants.sol": {
+      "lastModificationDate": 1656805867968,
+      "contentHash": "caba466e18c3dd31e4b888dc74e2665b",
+      "sourceName": "@semaphore-protocol/contracts/base/SemaphoreConstants.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": []
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@semaphore-protocol/contracts/interfaces/ISemaphoreGroups.sol": {
+      "lastModificationDate": 1656805868020,
+      "contentHash": "86706d107a94e2b45d895360a167f1b4",
+      "sourceName": "@semaphore-protocol/contracts/interfaces/ISemaphoreGroups.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ISemaphoreGroups"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol": {
+      "lastModificationDate": 1656805868148,
+      "contentHash": "e9fd9c7db00afd5cc323d9d29d155e84",
+      "sourceName": "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Hashes.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "IncrementalBinaryTree"
+      ]
+    },
+    "/home/suhas/zku/zku-final-project/contracts/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol": {
+      "lastModificationDate": 1656805868176,
+      "contentHash": "fd04704145cf2784b81cec317a522243",
+      "sourceName": "@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "PoseidonT3",
+        "PoseidonT6"
       ]
     }
   }

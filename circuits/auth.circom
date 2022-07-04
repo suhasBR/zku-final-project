@@ -7,6 +7,7 @@ template auth(){
     //public inputs
     signal input pubHash;
     signal input pubKey;
+    signal input groupId;
 
     //private inputs
     signal input secret;
@@ -17,10 +18,11 @@ template auth(){
 
     var intermediateHash;
 
-    //calculate hash of pubKey and secret
-    component poseidon_r = Poseidon(2);
-    poseidon_r.inputs[0] <== pubKey;
-    poseidon_r.inputs[1] <== secret;
+    //calculate hash of pubKey, secret and groupId
+    component poseidon_r = Poseidon(3);
+    poseidon_r.inputs[0] <== groupId;
+    poseidon_r.inputs[1] <== pubKey;
+    poseidon_r.inputs[2] <== secret;
     intermediateHash = poseidon_r.out;
 
 
@@ -36,4 +38,4 @@ template auth(){
     authFinalHash === pubHash;
 }
 
-component main {public[pubHash,pubKey]} = auth();
+component main {public[pubHash,pubKey,groupId]} = auth();
