@@ -69,19 +69,25 @@ yarn dev
 How it Works
 <br/>
 <br/>
-<img width="947" alt="image" src="https://user-images.githubusercontent.com/14362923/176052029-0247fb3d-ff7c-4e76-a844-62817f712214.png">
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/14362923/177227132-1554e5c1-6b74-4c4e-b490-aa604cc61724.png">
+<br/>
+<br/>
+Groups
+<br/>
+<br/>
+<img width="950" alt="image" src="https://user-images.githubusercontent.com/14362923/177227112-3c65158b-b196-49ad-b92d-d9eeb480d229.png">
 <br/>
 <br/>
 Phase 1
 <br/>
 <br/>
-<img width="952" alt="image" src="https://user-images.githubusercontent.com/14362923/176052186-e2efc5cf-2e11-4598-bc09-c5a918f9e499.png">
+<img width="949" alt="image" src="https://user-images.githubusercontent.com/14362923/177227090-3c9d2e69-4864-491c-b1fe-8709a7d0cca6.png">
 <br/>
 <br/>
 Phase 2 
 <br/>
 <br/>
-<img width="947" alt="image" src="https://user-images.githubusercontent.com/14362923/176052250-e8518fa2-0169-4eb4-8529-93b56f558a59.png">
+<img width="952" alt="image" src="https://user-images.githubusercontent.com/14362923/177227075-e76f5444-bf1d-4b14-9b30-ee9ff559cae6.png">
 <br/>
 
 
